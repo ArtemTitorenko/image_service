@@ -1,0 +1,29 @@
+<!doctype html>
+
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Загрузить изображение</title>
+</head>
+
+<body>
+    <a href="{% url 'processing:image_list' %}">Назад к списку</a>
+    <p>
+    <h1>{{ image_name }}</h1>
+    <form action="" method="post" enctype=multipart/form-data>
+        {% csrf_token %}
+        {% for fld in form %}
+            {{ fld.label }} <p>
+            {{ fld }} {{ fld.error }} <p>
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <strong>{{ error|escape }}</strong>
+        {% endfor %}
+        <p>
+        <button type="submit">Отправить</button>
+    </form>
+    <p>
+    <img src="{{ image.image.url }}" alt="connect">
+</body>
+
+</html>
